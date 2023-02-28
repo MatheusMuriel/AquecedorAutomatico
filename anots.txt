@@ -1,0 +1,23 @@
+
+
+Sensor de Temparatura DS18B20
+DS18B20
+
+
+Voltagem ->  3.0V ~ 5.5V
+
+
+
+Resistencia Tubular: https://www.wattco.com/tubular-heating-elements/
+
+https://www.instructables.com/Controlling-AC-light-using-Arduino-with-relay-modu/
+
+
+https://www.instructables.com/Test-Only-DIY-Bluetooth-Controllable-Mug-Heater-12/
+
+https://randomnerdtutorials.com/guide-for-ds18b20-temperature-sensor-with-arduino/
+
+https://github.com/digistump/DigistumpArduino
+http://digistump.com/wiki/digispark/tutorials/connecting
+
+
