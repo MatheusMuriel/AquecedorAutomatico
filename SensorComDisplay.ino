@@ -1,12 +1,19 @@
-#include <DigiCDC.h>
+#include <TM1637TinyDisplay.h>
 #include <OneWire.h>
 
 #define ONE_WIRE_BUS 0
+#define CLK 4
+#define DIO 3
+#define TEMPERATURA_IDEAL 70
+
 OneWire TemperatureSensor(ONE_WIRE_BUS);
+TM1637TinyDisplay display(CLK, DIO);
 
 void setup(void) {
-  SerialUSB.begin();
-  pinMode(0, OUTPUT);
+  pinMode(1, OUTPUT); // Sinal para o Relé
+  pinMode(3, OUTPUT); // Sinal para o Display
+  digitalWrite(1, LOW);
+  display.begin();
 }
 
 void loop(void) {
@@ -23,11 +30,14 @@ void loop(void) {
     data[i] = TemperatureSensor.read();
   }
   int16_t raw = (data[1] << 8) | data[0];
-  int16_t t = (int16_t)raw / 16.0;
+  int16_t temperatura = (int16_t)raw / 16.0;
 
-  SerialUSB.println(t);
-  if (t == 30){
-    SerialUSB.println("Aeeeos");
-    digitalWrite(0, HIGH);
+  display.showNumber(temperatura);
+  if (temperatura >= TEMPERATURA_IDEAL){
+    digitalWrite(1, HIGH); // Desliga o relé
+  } else if (temperatura < TEMPERATURA_IDEAL) {
+    digitalWrite(1, LOW); // Deixa ligado o relé
   }
+  
+  delay(3000);
 }

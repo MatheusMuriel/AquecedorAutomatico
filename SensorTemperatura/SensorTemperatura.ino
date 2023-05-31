@@ -1,28 +1,18 @@
-#include <DigiCDC.h>
-#include <OneWire.h>
+#include <TM1637Display.h>
 
-#define ONE_WIRE_BUS 0
-OneWire TemperatureSensor(ONE_WIRE_BUS);
+// Module connection pins (Digital Pins)
+#define CLK 4
+#define DIO 3
 
-void setup(void) {
-  SerialUSB.begin();
+// The amount of time (in milliseconds) between tests
+#define TEST_DELAY   1000
+int counter = 0;
+
+TM1637Display display(CLK, DIO);
+
+void setup() {
+  display.setBrightness(0x02);
 }
 
-void loop(void) {
-  TemperatureSensor.reset(); // reset one wire buss
-  TemperatureSensor.skip(); // select only device
-  TemperatureSensor.write(0x44); // start conversion
-  delay(1000); // wait for the conversion
-  TemperatureSensor.reset();
-  TemperatureSensor.skip();
-  TemperatureSensor.write(0xBE); // Read Scratchpad
-  
-  byte data[12];
-  for (byte i = 0; i < 9; i++) { // 9 bytes
-    data[i] = TemperatureSensor.read();
-  }
-  int16_t raw = (data[1] << 8) | data[0];
-  int16_t t = (int16_t)raw / 16.0;
-
-  SerialUSB.println(t);
+void loop() {
 }

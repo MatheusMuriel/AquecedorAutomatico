@@ -21,3 +21,9 @@ https://github.com/digistump/DigistumpArduino
 http://digistump.com/wiki/digispark/tutorials/connecting
 
 
+DDRB= 0xff; // all the pins are set as output pins.
+PORTB= 0xff; // all the PORT B pins are set to HIGH
+delay(1000);// turns ON the LED for a second
+PORTB= 0x00;//turns OFF the LED
+delay(1000);// turns OFF the LED for a second
+
